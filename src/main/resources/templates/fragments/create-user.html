@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+    </head>
+
+    <body>
+        <div th:fragment="create-user-dialog" id="create-user-dialog" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <form id="create-user-form" action="#" th:action="@{/users/create}" th:object="${userForm}" method="post" 
+                      class="modal-content form-horizontal form-label-left">
+                    <div class="modal-header">
+                        <button type="button" class="close cancel-create-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">New User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" th:field="*{firstname}" id="first-name" required="required" class="form-control col-md-7 col-xs-12"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" th:field="*{lastname}" id="last-name" name="last-name" class="form-control col-md-7 col-xs-12"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="email" th:field="*{email}" required="required" class="form-control col-md-7 col-xs-12" type="email" name="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" th:field="*{phone}" id="phone" required="required" class="form-control col-md-7 col-xs-12" name="phone"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Username<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="username" name="username" th:field="*{username}" class="form-control col-md-7 col-xs-12" required="required" type="text"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Roles
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="roles" th:field="*{roles}" class="form-control col-md-7 col-xs-12 select2-basic-multiple" name="roles" multiple="multiple">
+                                    <option th:each="i : ${roles}" th:value="${i}" th:text="${i}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default cancel-create-btn" data-dismiss="modal">Cancel</button>
+                        <button id="save-create-btn" type="button" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:o="urn:schemas-microsoft-com:office:office" 
+      style="padding:0;margin:0;background-color:rgb(243, 240, 236);background-color:rgb(243, 240, 236);margin-top:0;">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <style type="text/css">
+        /* START ENVELOPE CSS */
+
+        @media (max-width: 500px) {
+            /* Gmail iOS hack */
+            u+.body .inbox-fix,
+            u+.body .content-shell-table,
+            u+.body .footer-shell-table,
+            u+.body .footer {
+                min-width: calc(100vw - 8.5vw) !important;
+            }
+            .mobile-hide,
+            .ios-hide {
+                display: none !important;
+            }
+            .desktop-hide,
+            .desktop-hide img {
+                display: initial !important;
+            }
+            table.desktop-hide {
+                display: table !important;
+            }
+            .mobile-100w {
+                width: 100% !important;
+            }
+            .mobile-block {
+                display: block !important;
+            }
+            .mobile-left {
+                float: left !important;
+            }
+            .mobile-right {
+                float: right !important;
+            }
+            .mobile-center {
+                margin: 0 auto;
+                text-align: center !important;
+            }
+        }
+
+        @media (max-width: 599px) {
+            .mobile-hide-max,
+            .ios-hide-max {
+                display: none !important;
+            }
+            .inbox-fix {
+                display: none;
+            }
+            .desktop-hide-max,
+            .desktop-hide-max img {
+                display: initial !important;
+            }
+            table.content-shell-table,
+            table.footer-shell-table,
+            .footer {
+                width: 100% !important;
+            }
+        }
+
+
+        .hide,
+        .hide div,
+        .hide table,
+        .hide td,
+        .hide tr,
+        .hide a,
+        .hide img {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            max-height: 0 !important;
+            line-height: 0 !important;
+            mso-hide: all !important;
+            overflow: hidden !important;
+            visibility: hidden !important;
+        }
+
+        @media yahoo {
+            table {
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+            table table {
+                table-layout: auto;
+            }
+        }
+
+        * [data-term] {
+            border-bottom: none !important;
+            pointer-events: none !important;
+        }
+
+        .ii a {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        body,
+        .container,
+        html {
+            background-color: #F3F0EC;
+            margin-top: 0;
+        }
+
+        table {
+            -wings-cellpadding: 0;
+            -wings-cellspacing: 0;
+            -wings-border: 0;
+            border-spacing: 0;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: none;
+            outline: none;
+        }
+
+        .empty {
+            font-size: 0;
+            line-height: 0;
+        }
+
+        .desktop-hide,
+        .desktop-hide img,
+        .desktop-hide-max,
+        .desktop-hide-max img {
+            display: none;
+            mso-hide: all;
+        }
+
+        .gmail-fix-no-inline {
+            display: none;
+            display: none !important;
+        }
+
+        a {
+            color: inherit !important;
+        }
+
+        a img {
+            border-style: none;
+        }
+
+        .hide-link a,
+        .iosnonlink a {
+            text-decoration: none !important;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #F3F0EC;
+        }
+
+
+
+        /* Foreground Image */
+
+        .content-shell {}
+
+
+        .content-shell {
+            background-repeat: no-repeat;
+            background-color: #F3F0EC;
+
+        }
+
+        @media (max-width: 599px) {}
+
+
+        .footer-shell-table {
+            background-color: #F3F0EC;
+        }
+
+        .inbox-fix {
+            -wings-width: 600;
+            -wings-height: 1;
+            -wings-align: center;
+            width: 600px !important;
+        }
+
+        .inbox-fix img {
+            border-collapse: collapse;
+            display: block;
+            -wings-height: 1;
+            -wings-width: 200;
+        }
+
+        /* END ENVELOPE CSS */
+
+        .www-headline-center {
+            font-size: 49px !important;
+            line-height: 55px !important;
+            padding: 0 110px 0 110px !important;
+        }
+
+        .cfo-cinematic-background {
+            box-shadow: none !important;
+        }
+
+        @media(max-width: 500px) {
+            table .www-headline-center {
+                font-size: 41px !important;
+                padding-top: 0 !important;
+            }
+            td.cfo-copy.cfo-copy-1 {
+                padding: 5px 30px 0 30px !important;
+            }
+            td.cfo-copy.cfo-copy-2,
+            td.cfo-copy.cfo-copy-3 {
+                padding: 15px 30px 0 30px !important;
+            }
+        }
+
+        .divider {
+            font-size: 0;
+            line-height: 0;
+            -wings-height: 0;
+        }
+
+        .divider-table,
+        .divider-inner-table {
+            -wings-width: 100%;
+        }
+
+        .cfo-copy {
+            font-size: 16px;
+            line-height: 24px;
+            font-family: Helvetica Neue, Helvetica, Roboto, Segoe UI, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+            padding: 5px 90px 0 90px;
+        }
+
+        .cfo-copy a {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+            .cfo-copy {
+                font-size: 14px !important;
+                line-height: 20px !important;
+                padding: 5px 30px 0 30px !important;
+            }
+        }
+
+        /* Content Focus Dual Buttons */
+
+        .cfo-dual-buttons-shell {
+            width: 100%;
+        }
+
+        .cfo-dual-buttons.button-1,
+        .cfo-dual-buttons.button-2,
+        .cfo-dual-buttons.button-1-shell,
+        .cfo-dual-buttons.button-2-shell {
+            width: 50%;
+        }
+
+        .cfo-dual-buttons.button-1-table,
+        .cfo-dual-buttons.button-2-table {
+            width: 100%;
+        }
+
+        .cfo-dual-buttons.button-1-text.button-text-light {
+            color: #FFFFFF !important;
+        }
+
+        .cfo-dual-buttons.button-1-text.button-text-dark {
+            color: #000000 !important;
+        }
+
+        .cfo-dual-buttons.button-1-text a.button-text-light {
+            color: #FFFFFF !important;
+        }
+
+        .cfo-dual-buttons.button-1-text a.button-text-dark {
+            color: #000000 !important;
+        }
+
+        .cfo-dual-buttons.button-1-text {
+            color: #FFFFFF !important;
+            background-color: #D3D3D3 !important;
+            border: solid 1px #D3D3D3;
+            moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            font-family: Helvetica Neue, Helvetica, Roboto, Segoe UI, Arial, sans-serif;
+            font-size: 16px;
+            text-decoration: none !important;
+            text-align: center;
+            padding: 15px 0 15px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        a.cfo-dual-buttons.button-1-link {
+            text-decoration: none !important;
+        }
+
+        .cfo-dual-buttons.button-spacer {
+            font-size: 0;
+            line-height: 0;
+            padding: 0;
+            margin: 0;
+            height: 0;
+            width: 3%;
+            /*background-color: #F3F0EC !important;*/
+            color: #F3F0EC !important;
+        }
+
+        .cfo-dual-buttons.button-2-text {
+            color: #000000 !important;
+            border: solid 1px #000000;
+            moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            font-family: Helvetica Neue, Helvetica, Roboto, Segoe UI, Arial, sans-serif;
+            font-size: 16px;
+            text-decoration: none !important;
+            text-align: center;
+            padding: 15px 0 15px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .cfo-dual-buttons.button-2-text a,
+        .cfo-dual-buttons.button-2-shell a {
+            text-decoration: none !important;
+        }
+
+        table {
+            -wings-cellpadding: 0;
+            -wings-cellspacing: 0;
+            -wings-border: 0;
+            border-spacing: 0;
+        }
+
+
+        @media(max-width: 500px) {
+            .cfo-dual-buttons-table {
+                width: 100% !important;
+                padding: 0 30px 0 30px !important;
+                box-sizing: border-box;
+            }
+        }
+
+        /* End Content Focus Dual Buttons */
+
+        .viewAllText {
+            font-family: Helvetica, Arial, sans-serif;
+            -webkit-text-size-adjust: none;
+            font-size: 16px;
+            color: #000000;
+            padding: 0px 8px 0px 0px;
+            font-weight: bold;
+            line-height: 18px;
+        }
+
+        .viewAllText.rtl {
+            padding: 0 0 0 8px !important;
+        }
+
+
+        @media only screen and (max-width: 480px) {
+
+            .viewAllShell {
+                width: 100% !important;
+            }
+
+        }
+
+        .footer {
+            background-color: #F3F0EC;
+            text-align: center;
+        }
+
+        .footer-questions a {
+            font-family: Helvetica, Arial, sans-serif;
+            -webkit-text-size-adjust: none;
+            font-size: 13px;
+            mso-style-priority: 99;
+            color: #555555;
+            text-decoration: none;
+        }
+
+        .footer-no-link a,
+        a.footer-no-link {
+            text-decoration: none !important;
+            cursor: text;
+            color: #555555;
+        }
+
+        .footer-link,
+        a.footer-link,
+        .footer-link a {
+            font-weight: normal;
+            text-decoration: underline;
+            color: #555555;
+        }
+
+        .footer-copy {
+            font-family: Helvetica, Arial, sans-serif;
+            -webkit-text-size-adjust: none;
+            font-size: 13px;
+            mso-style-priority: 99;
+            color: #555555;
+            padding-left: 90px;
+            padding-right: 90px;
+            line-height: 18px;
+        }
+
+        .footer a {
+            font-weight: normal;
+            text-decoration: underline;
+            color: #555555;
+        }
+
+        .nowrap {
+            white-space: nowrap;
+        }
+
+        .footer .links,
+        .footer .questions,
+        .footer .additional_copy {
+            padding-bottom: 10px;
+        }
+
+        .footer .address {
+            padding-bottom: 2px;
+        }
+
+        @media (max-width: 500px) {
+            .footer {
+                padding-left: 30px !important;
+                padding-right: 30px !important;
+                width: 100% !important;
+            }
+            .footer-copy,
+            .footer-copy-no-padding,
+            .footer .footer-questions,
+            .privacy,
+            .footer-logo {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .break-footer-mobile {
+                display: block !important;
+                overflow: hidden !important;
+                height: 0 !important;
+            }
+        }
+
+        .image-custom-with-link {
+            padding: 22px 90px 0 90px;
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+
+        .image-custom-with-link img {
+            margin: 0 auto 0 auto;
+        }
+
+        @media (max-width: 500px) {
+            .image-custom-with-link {
+                padding: 20px 30px 0 30px !important;
+            }
+            .image-custom-with-link a img {
+                max-width: 100%;
+            }
+        }
+
+        .spacer,
+        .spacer td {
+            font-size: 0;
+            line-height: 0;
+            -wings-height: 0;
+        }
+
+        @media (max-width: 500px) {
+            .mobile-block {
+                display: block !important;
+            }
+        }
+
+
+        /* Ability to override mobile styles declared in content scripts */
+    </style>
+</head>
+
+<body bgcolor="#F3F0EC" class="body" style="padding:0;margin:0;background-color:rgb(243, 240, 236);background-color:rgb(243, 240, 236);margin-top:0;">
+    <div class="hide" style="display:none;width:0;height:0;max-height:0;line-height:0;mso-hide:all;overflow:hidden;visibility:hidden;">
+        Welcome to demo admin portal
+        <div class="hide" style="display: none; max-height: 0px; overflow:hidden;display:none;width:0;height:0;max-height:0;line-height:0;mso-hide:all;overflow:hidden;visibility:hidden;">
+            &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌
+        </div>
+    </div>
+    <table class="container-table" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing:0;">
+        <tbody>
+            <tr>
+                <td class="container" align="center" style="background-color:rgb(243, 240, 236);margin-top:0;">
+                    <table class="content-shell-table" width="600" cellpadding="0" cellspacing="0" border="0" style="border-spacing:0;">
+                        <tbody>
+                            <tr>
+                                <td class="content-shell" bgcolor="#F3F0EC" style="background-repeat:no-repeat;background-color:rgb(243, 240, 236);">
+                                    <table class="content" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing:0;">
+                                        <tbody>
+
+                                            <tr>
+                                                <td class="image-custom-with-link" align="center" style="padding:22px 90px 0 90px;width:100%;height:auto;text-align:center;">
+                                                    <img src="https://img.icons8.com/bubbles/100/000000/clouds.png" alt="" align="center" style="border-collapse:collapse;display:block;-ms-interpolation-mode:bicubic;border:none;outline:none;border-style:none;margin:0 auto 0 auto;"/> </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="image-custom-with-link" align="center" style="padding:22px 90px 0 90px;width:100%;height:auto;text-align:center;">
+                                                    <span style="color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 32px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;">
+                                                        Welcome [[${user.principals.get('firstname')}]] [[${user.principals.get('lastname')}]]</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="mobile-hide">
+                                                <td class="spacer-1 spacer" style="padding: 25px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                                            </tr>
+                                            <tr class="desktop-hide mobile-block" style="display:none;mso-hide:all;">
+                                                <td class="spacer-1 spacer" style="padding: 20px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                                            </tr>
+                                            <style>
+                                                .cfo-copy-1 a {
+                                                    color: #000000;
+                                                }
+
+                                                a.cfo-synopsis-link {
+                                                    color: #000000;
+                                                }
+                                            </style>
+                                            <tr>
+                                                <td class="cfo-copy cfo-copy-1" style="color:#000000;font-size:16px;line-height:24px;font-family:Helvetica Neue, Helvetica, Roboto, Segoe UI, sans-serif;-webkit-font-smoothing:antialiased;text-align:center;padding:5px 90px 0 90px;">
+                                                    <span style="color:#000000;">
+                                                        Welcome to demo admin portal, Click on the button below to activate your account
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="cfo-dual-buttons-shell" align="center" style="padding: 30px 0 0 0;width:100%;">
+                                                    <table class="cfo-dual-buttons-table" style="width: 50%;border-spacing:0;" cellpadding="0" cellspacing="0" border="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="cfo-dual-buttons button-spacer empty" style="font-size:0;line-height:0;font-size:0;line-height:0;padding:0;margin:0;height:0;width:3%;color:rgb(243, 240, 236);">
+                                                                    <img src="http://cdn.nflximg.com/us/email/spacer.gif" alt="" width="3%" style="border-collapse:collapse;display:block;-ms-interpolation-mode:bicubic;border:none;outline:none;"/> </td>
+                                                                <td class="cfo-dual-buttons button-2-shell" style="width:50%;">
+                                                                    <a class="cfo-dual-buttons button-2-link" th:href="${baseUrl}" 
+                                                                        style="text-decoration:none;color:inherit;">
+                                                                        <table class="cfo-dual-buttons button-2-table" style="width:100%;border-spacing:0;" cellpadding="0" cellspacing="0" border="0">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="cfo-dual-buttons button-2-text" style="color:rgb(0, 0, 0);border:solid 1px rgb(0, 0, 0);moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;font-family:Helvetica Neue, Helvetica, Roboto, Segoe UI, Arial, sans-serif;font-size:16px;text-decoration:none;text-align:center;padding:15px 0 15px 0;width:100%;font-weight:bold;">
+                                                                                        <a th:href="${baseUrl}" style="text-decoration:none;color:#000000;text-decoration:none;color:inherit;">Activate</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="mobile-hide">
+                                                <td class="spacer-2 spacer" style="padding: 60px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                                            </tr>
+                                            <tr class="desktop-hide mobile-block" style="display:none;mso-hide:all;">
+                                                <td class="spacer-2 spacer" style="padding: 50px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="footer-shell-table" width="100%" style="background-color:rgb(243, 240, 236);border-spacing:0;" cellpadding="0"
+        cellspacing="0" border="0">
+        <tbody>
+            <tr>
+                <td class="footer-shell">
+                    <table class="footer" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-spacing:0;background-color:rgb(243, 240, 236);text-align:center;">
+                        <tbody>
+                            <tr>
+                                <td class="spacer-3 spacer" style="padding: 30px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="footer-copy " style="font-family:Helvetica, Arial, sans-serif;-webkit-text-size-adjust:none;font-size:13px;mso-style-priority:99;color:rgb(85, 85, 85);padding-left:90px;padding-right:90px;line-height:18px;">
+                                    <span class="iosnonlink">
+                                        <a href="#" style="color:#555555; text-decoration:none !important;cursor:default;font-weight:normal;text-decoration:underline;color:rgb(85, 85, 85);text-decoration:none;color:inherit;">demo.com</a>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr class="mobile-hide">
+                                <td class="spacer-4 spacer" style="padding: 30px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                            </tr>
+                            <tr class="desktop-hide mobile-block" style="display:none;mso-hide:all;">
+                                <td class="spacer-4 spacer" style="padding: 24px 0 0 0;font-size:0;line-height:0;" height="0"> &nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="text-align: center">
+                                    <!--legal_content_footer-->
+                                    &copy; Copyright 2019 demo
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <table class="inbox-fix" width="600" height="1" align="center" style="width:600px;border-spacing:0;" cellpadding="0" cellspacing="0"
+        border="0">
+        <tbody>
+            <tr>
+                <td>
+                    <img src="http://cdn.nflximg.com/us/email/spacer.gif" height="1" width="200" style="border-collapse:collapse;display:block;-ms-interpolation-mode:bicubic;border:none;outline:none;"> </td>
+                <td>
+                    <img src="http://cdn.nflximg.com/us/email/spacer.gif" height="1" width="200" style="border-collapse:collapse;display:block;-ms-interpolation-mode:bicubic;border:none;outline:none;"> </td>
+                <td>
+                    <img src="http://cdn.nflximg.com/us/email/spacer.gif" height="1" width="200" style="border-collapse:collapse;display:block;-ms-interpolation-mode:bicubic;border:none;outline:none;"> </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="mobile-hide-max gmail-fix-no-inline" style="white-space:nowrap; font:15px courier; line-height:0;">
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    </div>
+</body>
+
+</html>

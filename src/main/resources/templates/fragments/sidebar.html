@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+    </head>
+
+    <body>
+
+        <div class="col-md-3 left_col" th:fragment="sidebar">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a th:href="@{/}" class="site_title">
+                        <i class="fa fa-paw"></i>
+                        <span><span sec:authentication="name"/></span>
+                    </a>
+                </div>
+
+                <div class="clearfix"></div>
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>Menu</h3>
+                        <ul class="nav side-menu">
+                            <li sec:authorize="hasRole('ADMIN')"><a><i class="fa fa-shield"></i> Admin <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a th:href="@{/users}"><i class="fa fa-user"></i>Users</a></li>
+                                    <li><a th:href="@{/roles}"><i class="fa fa-shield"></i>Roles</a></li>
+                                    <li><a th:href="@{/privileges}"><i class="fa fa-shield"></i>Privileges</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+
+
+            </div>
+        </div>
+    </body>
+
+</html>

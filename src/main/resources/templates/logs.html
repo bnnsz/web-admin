@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Transactions </title>
+
+        <!-- Bootstrap -->
+        <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet"/>
+        <!-- Font Awesome -->
+        <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+        <!-- NProgress -->
+        <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet"/>
+        <!-- iCheck -->
+        <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet"/>
+
+        <!-- Custom Theme Style -->
+        <link th:href="@{/build/css/custom.min.css}" rel="stylesheet"/>
+
+    </head>
+
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+
+                <div th:insert="fragments/sidebar.html :: sidebar"> </div>
+                <!-- insert sidebar here -->
+
+                <!-- Insert topbar here -->
+                <div th:insert="fragments/topbar.html :: topbar"> </div>
+
+                <!-- page content -->
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>Transactions</h3>
+                            </div>
+
+                            <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search for..."/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <div class="btn-toolbar">
+                                            <div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">10
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul role="menu" class="dropdown-menu">
+                                                    <!-- /transactions/paginated/1?count=10 -->
+                                                    <li>
+                                                        <a th:href="@{'/transactions/' + ${currentPage} + '?count=10'}">10</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/transactions/' + ${currentPage} + '?count=20'}">20</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/transactions/' + ${currentPage} + '?count=50'}">50</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/transactions/' + ${currentPage} + '?count=100'}">100</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/transactions/' + ${currentPage} + '?count=500'}">500</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/transactions/' + ${currentPage} + '?count=1000'}">1000</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="x_content">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped jambo_table bulk_action">
+                                                <thead>
+                                                    <tr class="headings">
+                                                        <th>
+                                                            <input type="checkbox" id="check-all" class="flat"/>
+                                                        </th>
+                                                        <th class="column-title">Ref </th>
+                                                        <th class="column-title">Amount </th>
+                                                        <th class="column-title">State</th>
+                                                        <th class="column-title">Recipient</th>
+                                                        <th class="column-title">Bank </th>
+                                                        <th class="column-title">Account </th>
+                                                        <th class="column-title no-link last">
+                                                            <span class="nobr">Actions</span>
+                                                        </th>
+                                                        <th class="bulk-actions" colspan="7">
+                                                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
+                                                                <span class="action-cnt"> </span> )
+                                                                <i class="fa fa-chevron-down"></i>
+                                                            </a>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr class="even pointer"  th:switch="${#lists.size(transactions)}">
+                                                        <td class="a-center " colspan="8">
+                                                            No transaction available
+                                                        </td>
+                                                    </tr>
+                                                    <tr th:each="transaction : ${transactions}" class="odd pointer">
+                                                        <td class="a-center ">
+                                                            <input type="checkbox" class="flat" name="table_records"/>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <span th:text="${transaction.transactionRef}"/>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <span th:text="${transaction.transactionAmount}"/>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <span th:text="${transaction.status}"/>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <span th:text="${transaction.recipientName}"/>
+                                                        </td>
+                                                        <td class=" ">
+                                                            <span th:text="${transaction.recipientBank}"/>
+                                                        </td>
+
+                                                        <td class=" ">
+                                                            <span th:text="${transaction.recipientAccount}"/>
+                                                        </td>
+                                                        <td class=" last">
+                                                            <table>
+                                                                <tr th:each="action: ${transaction.actions}">
+                                                                    <td>
+                                                                        <a th:href="@{''+${action.path}}">
+                                                                            <span th:text="${action.name}"></span>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="x_footer">
+                                        <div class="btn-toolbar">
+                                            <div class="btn-group">
+                                                <table>
+                                                    <tr th:each="page: ${pagination}">
+                                                        <td>
+                                                            <a class="btn btn-default" th:classappend="${page.active}" th:href="@{'/transactions/' + ${page.pageNo} + '?count='+${pageCount}}">
+                                                                <span th:text="${page.pageNo}"></span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- Insert footer here -->
+            <div th:insert="fragments/footer.html :: footer"> </div>
+        </div>
+
+        <!-- jQuery -->
+        <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+        <!-- Bootstrap -->
+        <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- FastClick -->
+        <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+        <!-- NProgress -->
+        <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+        <!-- iCheck -->
+        <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script th:src="@{/build/js/custom.min.js}"></script>
+    </body>
+
+</html>

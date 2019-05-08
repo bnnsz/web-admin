@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Privileges </title>
+
+        <!-- Bootstrap -->
+        <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet"/>
+        <!-- Font Awesome -->
+        <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+        <!-- NProgress -->
+        <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet"/>
+
+        <!-- bootstrap-daterangepicker -->
+        <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet"/>
+        <!-- bootstrap-datetimepicker -->
+        <link th:href="@{/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css}" rel="stylesheet"/>
+        <!--Select2-->
+        <link th:href="@{/vendors/select2/css/select2.css}" rel="stylesheet"/>
+        <!-- iCheck -->
+        <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet"/>
+
+        <!-- Custom Theme Style -->
+        <link th:href="@{/build/css/custom.css}" rel="stylesheet"/>
+
+    </head>
+
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+
+                <div th:insert="fragments/sidebar.html :: sidebar"> </div>
+                <!-- insert sidebar here -->
+
+                <!-- Insert topbar here -->
+                <div th:insert="fragments/topbar.html :: topbar"> </div>
+
+                <!-- page content -->
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>Privileges</h3> 
+
+                            </div>
+
+                            <div class="title_right">
+                                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                    <form action="#" th:action="@{'/privileges/search?page=' + ${currentPage} + '&amp;count='+${pageCount} + '&amp;f='+${from} + '&amp;t='+${to}}" th:object="${searchForm}" method="post">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" th:field="*{value}" placeholder="Search for..."/>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+
+
+                                        <div class="btn-toolbar justify-content-between">
+                                            <div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="false">
+                                                    <span th:text="${pageCount}" style="color: black"></span>
+                                                    <span class="caret"></span>
+                                                </button>
+
+                                                <button id="reportrange" class="btn btn-default dropdown-toggle" type="button">
+                                                    <i class="fa fa-calendar"></i>&nbsp;
+                                                    <span></span> <i class="fa fa-caret-down"></i>
+
+                                                </button>
+                                                <ul role="menu" class="dropdown-menu">
+                                                    <!-- /privileges/paginated/1?count=10 -->
+                                                    <li>
+                                                        <a th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=10' + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">10</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=20' + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">20</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=50' + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">50</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=100' + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">100</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=500' + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">500</a>
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=1000' + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">1000</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+
+                                            <div class="btn-group pull-right">
+                                                <a id="new-btn" class="btn btn-default" type="button">New</a>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="x_content">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped jambo_table bulk_action">
+                                                <thead>
+                                                    <tr class="headings">
+                                                        <th class="column-title">Privilege </th>
+                                                        <th class="column-title">Actions </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr class="even pointer"  th:if="${#lists.isEmpty(privileges)}">
+                                                        <td class="a-center " colspan="2">
+                                                            No Privilege available
+                                                        </td>
+                                                    </tr>
+                                                    <tr th:each="privilege : ${privileges}" class="odd pointer">
+                                                        <td class=" ">
+                                                            <span th:text="${privilege}"/>
+                                                        </td>
+
+                                                        <td class=" ">
+                                                            <div>
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="x_footer">
+                                        <div class="btn-toolbar">
+                                            <div class="btn-group"  th:if="${!isFirstPage}">
+                                                <a class="btn btn-default" 
+                                                   th:href="@{'/privileges?page=1' + '&amp;count='+${pageCount}  + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">
+                                                    |<
+                                                </a>
+                                            </div>
+                                            <div class="btn-group" th:each="page: ${pagination}">
+                                                <a class="btn btn-default" th:classappend="${page.active}" 
+                                                   th:href="@{'/privileges?page=' + ${page.pageNo} + '&amp;count='+${pageCount}  + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">
+                                                    <span th:text="${page.pageNo}"></span>
+                                                </a>
+                                            </div>
+                                            <div class="btn-group" th:if="${!isLastPage}">
+                                                <a class="btn btn-default" 
+                                                   th:href="@{'/privileges?page='+ ${lastPage} + '&amp;count='+${pageCount}  + '&amp;s='+${search}+ '&amp;f='+${from} + '&amp;t='+${to}}">
+                                                    >|
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:insert="fragments/create-privilege.html :: create-privilege-dialog"> </div>
+            <!-- /page content -->
+
+            <!-- Insert footer here -->
+            <div th:insert="fragments/footer.html :: footer"> </div>
+        </div>
+
+        <!-- jQuery -->
+        <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+        <!-- Bootstrap -->
+        <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- FastClick -->
+        <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+        <!-- NProgress -->
+        <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+
+        <!-- bootstrap-daterangepicker -->
+        <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+        <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+        <!-- bootstrap-datetimepicker -->    
+        <script th:src="@{/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js}"></script>
+        <!--Select2-->
+        <script th:src="@{/vendors/select2/js/select2.js}" rel="stylesheet"/>
+        <!-- iCheck -->
+        <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script th:src="@{/build/js/custom.js}"></script>
+
+        <a style="display: none" id="hiddenLink" th:href="@{'/privileges?page=' + ${currentPage} + '&amp;count=' + ${pageCount} + '&amp;s='+${search}}"></a>
+
+        <script  th:inline="javascript">
+            /*<![CDATA[*/
+
+            var from = /*[[${from}]]*/ "";
+            var to = /*[[${to}]]*/ "";
+            var msg = /*[[${messages}]]*/ [];
+
+            $(document).ready(function () {
+                if (msg) {
+                    for (i in msg) {
+                        new PNotify(msg[i]);
+                    }
+                }
+
+                $(window).keydown(function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+                
+                $('.select2-basic-multiple').select2();
+                
+                var createPrivilegeModal = $('#create-privilege-dialog');
+
+                $('#save-create-btn').click(function () {
+                   createPrivilegeModal.modal("hide");
+                    $('#create-privilege-form').submit();
+                });
+
+                $('.cancel-create-btn').click(function () {
+                    createPrivilegeModal.modal("hide");
+                });
+
+                $('#new-btn').click(function (event) {
+                    event.preventDefault();
+                    createPrivilegeModal.modal("show");
+                });
+                
+                var start = moment(from, 'DDMMYYYYhhmmA');
+                var end = moment(to, 'DDMMYYYYhhmmA');
+
+                if (end === null || start === null) {
+                    end = moment();
+                    start = moment().subtract(365, 'days');
+                }
+
+
+                function cb(start, end) {
+
+                    $('#reportrange span').html(start.format('D MMMM, YYYY hh:mm A') + ' - ' + end.format('D MMMM, YYYY hh:mm A'));
+
+                }
+
+                $('#reportrange').daterangepicker({
+                    timePicker: true,
+                    linkedCalendars: false,
+                    startDate: start,
+                    endDate: end,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    }
+                }, cb).on('apply.daterangepicker', function (ev, picker) {
+                    var url = $("#hiddenLink").attr('href');
+                    console.log(picker.startDate.format('YYYY-MM-DD'));
+                    console.log(picker.endDate.format('YYYY-MM-DD'));
+                    var href = url + '&f=' + picker.startDate.format("DDMMYYYYhhmma") + '&t=' + picker.endDate.format("DDMMYYYYhhmma");
+                    console.log(href);
+                    window.location.href = href;
+                });
+                cb(start, end);
+            });
+            /*]]>*/
+        </script>
+    </body>
+
+</html>

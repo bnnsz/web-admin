@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+    </head>
+
+    <body>
+        <!-- top navigation -->
+        <div class="top_nav" th:fragment="topbar">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a th:href="@{/logout}">
+                                <span><i class="fa fa-sign-out pull-right" style="font-size:30px; vertical-align: middle;"></i> Log Out</span></a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </body>
+
+</html>

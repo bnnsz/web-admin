@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Configurations </title>
+
+        <!-- Bootstrap -->
+        <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet"/>
+        <!-- Font Awesome -->
+        <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+        <!-- NProgress -->
+        <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet"/>
+        <!-- iCheck -->
+        <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet"/>
+
+        <!-- Custom Theme Style -->
+        <link th:href="@{/build/css/custom.min.css}" rel="stylesheet"/>
+
+        <link th:href="@{/vendors/pnotify/dist/pnotify.css}" rel="stylesheet"/>
+        <link th:href="@{/vendors/pnotify/dist/pnotify.buttons.css}" rel="stylesheet"/>
+        <link th:href="@{/vendors/pnotify/dist/pnotify.nonblock.css}" rel="stylesheet"/>
+
+    </head>
+
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+
+                <div th:insert="fragments/sidebar.html :: sidebar"> </div>
+                <!-- insert sidebar here -->
+
+                <!-- Insert topbar here -->
+                <div th:insert="fragments/topbar.html :: topbar"> </div>
+
+                <!-- page content -->
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>Configurations</h3>
+                            </div>
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <form id="submit-form" action="#" autocomplete="off" th:action="@{/configurations/save}" th:object="${form}" method="post">
+                                        <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+                                        <input style="display:none" type="text" name="fakeusernameremembered"/>
+                                        <input style="display:none" type="password" name="fakepasswordremembered"/>
+                                        <div class="x_title">
+                                            <div class="x_footer">
+                                                <div class="btn-toolbar">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-primary" type="submit" sec:authorize="hasAuthority('CONFIG_WRITE')">Save / Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="x_content">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped jambo_table bulk_action">
+                                                    <thead>
+                                                        <tr class="headings">
+                                                            <th class="column-title">Property</th>
+                                                            <th class="column-title">value</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr th:each="config, stat : *{configurations}" class="odd pointer">
+                                                            <td class="a-center ">
+                                                                <span th:text="${config.key}"/>
+                                                                <input type="hidden" class="form-control" th:value="${config.key}" th:field="*{configurations[__${stat.index}__].key}"/>
+                                                                <input type="hidden" class="form-control" th:value="${config.type}" th:field="*{configurations[__${stat.index}__].type}"/>
+                                                                <input type="hidden" class="form-control" th:value="${config.options}" th:field="*{configurations[__${stat.index}__].options}"/>
+                                                            </td>
+                                                            <td class=" ">
+
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12" th:switch="__${config.type}__">
+                                                                        <span  th:case="'NUMBER'" th:text="${config.value}" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <input th:case="'NUMBER'" type="number" class="form-control" 
+                                                                               th:value="${config.value}" 
+                                                                               th:field="*{configurations[__${stat.index}__].value}"
+                                                                               sec:authorize="hasAuthority('CONFIG_WRITE')"
+                                                                               step="1"/>
+
+                                                                        <span  th:case="'PNUMBER'" th:text="${config.value}" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <input th:case="'PNUMBER'" type="number" class="form-control" 
+                                                                               th:value="${config.value}" 
+                                                                               th:field="*{configurations[__${stat.index}__].value}"
+                                                                               sec:authorize="hasAuthority('CONFIG_WRITE')"
+                                                                               min="0"
+                                                                               step="1"/>
+
+                                                                        <span  th:case="'CURRENCY'" th:text="${config.value}" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <input th:case="'CURRENCY'" type="number" class="form-control" 
+                                                                               th:value="${config.value}" 
+                                                                               th:field="*{configurations[__${stat.index}__].value}"
+                                                                               sec:authorize="hasAuthority('CONFIG_WRITE')"
+                                                                               min="0.01" 
+                                                                               step="0.01"/>
+
+                                                                        <span  th:case="'TEXT'" th:text="${config.value}" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <input th:case="'TEXT'" type="text" class="form-control" 
+                                                                               th:value="${config.value}" 
+                                                                               th:field="*{configurations[__${stat.index}__].value}"
+                                                                               sec:authorize="hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <span  th:case="'URL'" th:text="${config.value}" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <input th:case="'URL'" type="url" class="form-control" 
+                                                                               th:value="${config.value}" 
+                                                                               th:field="*{configurations[__${stat.index}__].value}"
+                                                                               sec:authorize="hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <span  th:case="'SECRETE'" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')">
+                                                                            **********
+                                                                        </span>
+
+                                                                        <input th:case="'SECRETE'" autocomplete="off" type="password" class="form-control" 
+                                                                               th:value="${config.value}" 
+                                                                               th:field="*{configurations[__${stat.index}__].value}"
+                                                                               sec:authorize="hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <span  th:case="'OPTIONS'" th:text="${config.value}" 
+                                                                               sec:authorize="!hasAuthority('CONFIG_WRITE')"/>
+
+                                                                        <select class="form-control"
+                                                                                th:case="'OPTIONS'"
+                                                                                th:value="${config.value}" 
+                                                                                th:field="*{configurations[__${stat.index}__].value}"
+                                                                                sec:authorize="hasAuthority('CONFIG_WRITE')">
+                                                                            <option th:each="opt : ${config.options}" 
+                                                                                    th:value="${opt}" 
+                                                                                    th:text="${opt}"></option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                        <div class="x_footer">
+                                            <div class="btn-toolbar">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary" type="submit" sec:authorize="hasAuthority('CONFIG_WRITE')">Save / Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                    <div id="confirm-dialog" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close confirm-dialog-btn-no" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="confirm-dialog-title">Title</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4 id="confirm-dialog-message">Text</h4>
+                                                    <p></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="" type="button" class="btn btn-default confirm-dialog-btn-no" data-dismiss="modal">No</button>
+                                                    <button id="confirm-dialog-btn-yes" type="button" class="btn btn-primary" >Yes</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- Insert footer here -->
+            <div th:insert="fragments/footer.html :: footer"> </div>
+        </div>
+
+        <!-- jQuery -->
+        <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+        <!-- Bootstrap -->
+        <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- FastClick -->
+        <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+        <!-- NProgress -->
+        <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+        <!-- iCheck -->
+        <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+
+        <!-- PNotify -->
+        <script th:src="@{/vendors/pnotify/dist/pnotify.js}"></script>
+        <script th:src="@{/vendors/pnotify/dist/pnotify.buttons.js}"></script>
+        <script th:src="@{/vendors/pnotify/dist/pnotify.nonblock.js}"></script>
+
+        <!--<script th:src="@{/vendors/validator/validator.js}"></script>-->
+
+        <!-- Custom Theme Scripts -->
+        <script th:src="@{/build/js/custom.js}"></script>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var msg = /*[[${messages}]]*/ [];
+
+            $(document).ready(function () {
+                if (msg) {
+                    for (i in msg) {
+                        new PNotify(msg[i]);
+                    }
+                }
+
+                $(window).keydown(function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+
+                $('#submit-form').submit(function (event) {
+                    event.preventDefault();
+                    var currentForm = this;
+                    
+                    var form = $('#'+currentForm.id);
+
+                    $('#confirm-dialog-title').html("Warning");
+                    $('#confirm-dialog-message').html('Applcation might be restarted to apply any changes, continue?');
+
+                    var dialog = $('#confirm-dialog').modal("show");
+
+                    $('#confirm-dialog-btn-yes').click(function () {
+                        dialog.modal("hide");
+                        currentForm.submit();
+                    });
+
+                    $('.confirm-dialog-btn-no').click(function () {
+                        dialog.modal("show");
+                    });
+                });
+            });
+
+//            console.log("-----------------------------  aaa");
+//                            $.post(currentForm.attr('action'), currentForm.serialize(), function (res) {
+//                                // Do something with the response `res`
+//                                console.log("-----------------------------  bbb");
+//                                console.log(res);
+//                                // Don't forget to hide the loading indicator!
+//                            });
+//                            return false;
+            /*]]>*/
+        </script>
+    </body>
+
+</html>

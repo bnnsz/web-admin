@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+    </head>
+
+    <body>
+        <div th:fragment="create-role-dialog" id="create-role-dialog" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <form id="create-role-form" action="#" th:action="@{/roles/create}" th:object="${roleForm}" method="post" 
+                      class="modal-content form-horizontal form-label-left">
+                    <div class="modal-header">
+                        <button type="button" class="close cancel-create-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">New Role</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12">Name
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input id="rolename" name="value" th:field="*{value}" class="form-control col-md-7 col-xs-12" required="required" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12">Permissions
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select id="permissions" th:field="*{grantedPrivileges}" class="form-control col-md-7 col-xs-12 select2-basic-multiple" name="permissions" multiple="multiple">
+                                    <option th:each="i : ${grants}" th:value="${i}" th:text="${i}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default cancel-create-btn" data-dismiss="modal">Cancel</button>
+                        <button id="save-create-btn" type="button" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+
+</html>
